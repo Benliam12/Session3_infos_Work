@@ -1,0 +1,6 @@
+Roger 80
+Bruno 100
+Robert 82.5
+Caroline 50
+Annabelle 92.7
+Sylvie 73.2
