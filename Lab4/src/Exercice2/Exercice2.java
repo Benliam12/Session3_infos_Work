@@ -2,7 +2,6 @@ package Exercice2;
 
 public class Exercice2
 {
-
     public static void main(String[] args)
     {
         try {
@@ -17,5 +16,4 @@ public class Exercice2
             System.err.println("Veuillez saisir un entier.");
         }
     }
-
 }

@@ -24,6 +24,10 @@ public class Exercice3
 
                 System.out.println("CONGRADULATION");
             }
+            else
+            {
+                System.out.println("Les arguments ne sont pas valide =(");
+            }
         }
         catch(Exception ex)
         {
