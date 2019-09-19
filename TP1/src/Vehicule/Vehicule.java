@@ -5,6 +5,7 @@ public class Vehicule
 
     private int kilometers;
     private double value;
+    private int year;
     private String model;
     private String brand;
 
@@ -16,6 +17,11 @@ public class Vehicule
     public int getKilometers()
     {
         return this.kilometers;
+    }
+
+    public int getYear()
+    {
+        return this.year;
     }
 
 }

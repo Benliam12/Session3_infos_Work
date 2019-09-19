@@ -1,6 +1,8 @@
 import User.User;
 import User.UserBasicData;
 
+import java.util.Calendar;
+
 import static java.lang.Math.floor;
 
 public class InsuranceCalculator
@@ -68,8 +70,13 @@ public class InsuranceCalculator
     {
         return (user.getSpecialConditionsSpeciales().size() == 0) ? 0.3 : 0;
     }
+    public static double addVehiculeYearPrice(User user)
+    {
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        int diff = year - user.getVehicule().getYear();
 
-    
+        return 0; //TODO: Not return 0 xD
+    }
 
     public static double addVehiculeKilometerPrice(User user)
     {
