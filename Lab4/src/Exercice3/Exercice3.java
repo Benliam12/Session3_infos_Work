@@ -1,16 +1,14 @@
 package Exercice3;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Exercice3
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
+
+        BufferedReader patate = null;
         try
         {
             if(args.length == 2)

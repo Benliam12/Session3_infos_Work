@@ -1,6 +1,7 @@
 package Exercice2;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Entier
 {

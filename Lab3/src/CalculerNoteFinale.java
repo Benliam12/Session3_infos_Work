@@ -23,12 +23,18 @@ public class CalculerNoteFinale
             BufferedReader bufferedReader = new BufferedReader(file);
 
             while((line = bufferedReader.readLine()) != null) {
-                String[] data = line.split(" ");
-                double mark = Double.parseDouble(data[1]);
-                students.add(new Student(data[0],(int)Math.round(mark)));
-                groupeAvg += mark;
+                try
+                {
+                    String[] data = line.split(" ");
+                    double mark = Double.parseDouble(data[1]);
+                    students.add(new Student(data[0],(int)Math.round(mark)));
+                    groupeAvg += mark;
+                }
+                catch(NumberFormatException ex)
+                {
+                    System.out.println("Invalid number =(");
+                }
             }
-
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
