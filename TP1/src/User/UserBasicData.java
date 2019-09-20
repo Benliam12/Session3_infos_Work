@@ -9,7 +9,9 @@ public class UserBasicData
     protected String mailAdress;
     protected String phoneNumber;
     protected int age;
+    protected int ageOfDriverLicence;
     protected int kilometersPerYears;
+    protected int numberOfInfractions = -1;
     protected Sex sex;
 
 
@@ -18,16 +20,23 @@ public class UserBasicData
 
     }
 
+    /**
+     * Check if everything has at least some values
+     * @return result of the checker
+     */
     public boolean isCompleted()
     {
         return (
-                this.firstName != null &&
-                this.lastName != null &&
-                this.adress != null &&
-                this.mailAdress != null &&
-                this.phoneNumber != null &&
-                this.age != 0 &&
-                this.sex != null
+                this.firstName           != null &&
+                this.lastName            != null &&
+                this.adress              != null &&
+                this.mailAdress          != null &&
+                this.phoneNumber         != null &&
+                this.ageOfDriverLicence  != 0 &&
+                this.kilometersPerYears  != 0 &&
+                this.age                 != 0 &&
+                this.numberOfInfractions != -1 &&
+                this.sex                 != null
                 );
     }
 
@@ -50,9 +59,24 @@ public class UserBasicData
         return this.kilometersPerYears;
     }
 
+    public int getAgeOfDriverLicence()
+    {
+        return this.ageOfDriverLicence;
+    }
+
+    public int getNumberOfInfractions() {
+        return numberOfInfractions;
+    }
+
     /*
     SETTERS
      */
+
+    public UserBasicData setNumberOfInfractions(int numberOfInfractions)
+    {
+        this.numberOfInfractions = numberOfInfractions;
+        return this;
+    }
 
     public UserBasicData setFirstName(String firstName)
     {
@@ -93,6 +117,18 @@ public class UserBasicData
     public UserBasicData setSex(Sex sex)
     {
         this.sex = sex;
+        return this;
+    }
+
+    public UserBasicData setAgeOfDriverLicence(int age)
+    {
+        this.ageOfDriverLicence = age;
+        return this;
+    }
+
+    public UserBasicData setKilometersPerYear(int kilometersPerYear)
+    {
+        this.kilometersPerYears = kilometersPerYear;
         return this;
     }
 

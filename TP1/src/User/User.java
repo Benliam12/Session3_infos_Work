@@ -1,6 +1,6 @@
 package User;
 
-import Vehicule.Vehicule;
+import Vehicule.Vehicle;
 
 import java.util.ArrayList;
 
@@ -8,8 +8,9 @@ public class User
 {
 
     private UserBasicData userBasicData = null;
-    private Vehicule vehicule;
-    private ArrayList<SpecialConditions> specialConditionsSpeciales = new ArrayList<>();
+    private Vehicle vehicle;
+    private ArrayList<SpecialConditions> specialConditions = new ArrayList<>();
+    private boolean isAlreadyCustomer = false;
 
     public User(UserBasicData userBasicData)
     {
@@ -20,19 +21,27 @@ public class User
     /*#########################
         SETTERS
      #########################*/
-
-    public User addConditionSpeciale(SpecialConditions specialConditions)
+    public void setSpecialConditions(ArrayList<SpecialConditions> specialCondition)
     {
-        if(!this.specialConditionsSpeciales.contains(specialConditions))
-            this.specialConditionsSpeciales.add(specialConditions);
-
-        return this;
+        this.specialConditions = specialCondition;
     }
 
-    public User setConditionSpeciales(ArrayList<SpecialConditions> conditionSpeciales)
+    public void addSpecialCondition(SpecialConditions specialConditions)
     {
-        this.specialConditionsSpeciales = conditionSpeciales;
-        return this;
+        if(!this.specialConditions.contains(specialConditions))
+            this.specialConditions.add(specialConditions);
+    }
+
+    public void setVehicle(Vehicle v)
+    {
+        this.vehicle = v;
+        if(v.getValue() >= 100000)
+            this.addSpecialCondition(SpecialConditions.CAR_VALUE_HIGHER_THAN_100K);
+    }
+
+    public void setIsCustomer(boolean isAlreadyCustomer)
+    {
+        this.isAlreadyCustomer = isAlreadyCustomer;
     }
 
     /*#########################
@@ -45,21 +54,27 @@ public class User
 
     public ArrayList<SpecialConditions> getSpecialConditionsSpeciales()
     {
-        return this.specialConditionsSpeciales;
+        return this.specialConditions;
     }
 
-    public Vehicule getVehicule()
+    public Vehicle getVehicle()
     {
-        return this.vehicule;
+        return this.vehicle;
     }
 
+    public boolean isAlreadyCustomer() {
+       return  this.isAlreadyCustomer;
+    }
 
     public enum SpecialConditions
     {
 
         THREE_OR_MORE_DRIVES("3 conducteurs ou plus par véhicule"),
-        SUSPENDED_IN_THE_LAST_THREE_YEARS("  ");
-
+        SUSPENDED_IN_THE_LAST_THREE_YEARS("Suspension de permis dans les 3 dernières années"),
+        CRIMINAL("L'existance d'un dossier criminel"),
+        REFUSED_IN_LAST_FIVE_YEARS("Police d'assurance auto ou résidentielle résiliée/refusée dans les 5 dernières années"),
+        APPRENDICE_DRIVE("Conducteur principal détient un permis d'apprenti"),
+        CAR_VALUE_HIGHER_THAN_100K("Valeur de la voiture supérieur à 100 000$");
 
         private String value;
 

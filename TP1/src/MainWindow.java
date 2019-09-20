@@ -16,8 +16,6 @@ public class MainWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(600,900));
 
-
-
         frame.pack();
         frame.setVisible(true);
 
