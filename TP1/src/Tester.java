@@ -12,12 +12,12 @@ public class Tester
     {
         UserBasicData basicData = new UserBasicData();
 
-        basicData.setAdress("450 rue Poney")
+        basicData.setAddress("450 rue Poney")
                 .setAge(41)
                 .setFirstName("Jean")
                 .setLastName("Marie")
                 .setPhoneNumber("819-291-2019")
-                .setMailAdress("patate@gmail.com")
+                .setMailAddress("patate@gmail.com")
                 .setSex(UserBasicData.Sex.HOMME)
                 .setKilometersPerYear(10000)
                 .setAgeOfDriverLicence(17)

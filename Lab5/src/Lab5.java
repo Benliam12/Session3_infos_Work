@@ -16,18 +16,23 @@ public class Lab5
     private JTextField textField;
     private JButton button;
     private JLabel outPutLabel;
+    private JPanel panel2;
 
 
     private boolean firstStart = true;
 
     public static void main(String[] args)
     {
-        JFrame frame = new JFrame("App");
+        JFrame frame = new JFrame("Lab 5");
         Lab5 mw = new Lab5();
         frame.setContentPane(mw.getPanel());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(500,300));
         frame.setResizable(false);
+
+        mw.button.setBackground(new Color(219, 10, 91));
+        mw.button.setForeground(Color.white);
+        mw.button.setUI(new ButtonUI());
 
         mw.button.addActionListener(new ActionListener() {
             @Override
@@ -87,7 +92,6 @@ public class Lab5
         {
            String  normal = sb.toString();
            String reversed = sb.reverse().toString();
-
 
             return normal.equalsIgnoreCase(reversed);
         }

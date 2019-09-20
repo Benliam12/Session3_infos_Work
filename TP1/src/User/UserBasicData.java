@@ -5,8 +5,8 @@ public class UserBasicData
 
     protected String firstName;
     protected String lastName;
-    protected String adress;
-    protected String mailAdress;
+    protected String address;
+    protected String mailAddress;
     protected String phoneNumber;
     protected int age;
     protected int ageOfDriverLicence;
@@ -29,13 +29,13 @@ public class UserBasicData
         return (
                 this.firstName           != null &&
                 this.lastName            != null &&
-                this.adress              != null &&
-                this.mailAdress          != null &&
+                this.address             != null &&
+                this.mailAddress         != null &&
                 this.phoneNumber         != null &&
-                this.ageOfDriverLicence  != 0 &&
-                this.kilometersPerYears  != 0 &&
-                this.age                 != 0 &&
-                this.numberOfInfractions != -1 &&
+                this.ageOfDriverLicence  != 0    &&
+                this.kilometersPerYears  != 0    &&
+                this.age                 != 0    &&
+                this.numberOfInfractions != -1   &&
                 this.sex                 != null
                 );
     }
@@ -90,15 +90,15 @@ public class UserBasicData
         return this;
     }
 
-    public UserBasicData setAdress(String adress)
+    public UserBasicData setAddress(String address)
     {
-        this.adress = adress;
+        this.address = address;
         return this;
     }
 
-    public UserBasicData setMailAdress(String mailAdress)
+    public UserBasicData setMailAddress(String mailAddress)
     {
-        this.mailAdress = mailAdress;
+        this.mailAddress = mailAddress;
         return this;
     }
 
@@ -135,7 +135,8 @@ public class UserBasicData
     public enum Sex
     {
         HOMME,
-        FEMME
+        FEMME,
+        NONE
     }
 
 }
