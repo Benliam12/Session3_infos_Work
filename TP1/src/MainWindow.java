@@ -1,11 +1,12 @@
-import Listeners.ComboBoxDateListener;
+import Listeners.ComboBoxDateMonthListener;
+import Listeners.ComboBoxDateYearListener;
 import UiDependencies.ComboItems;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DateFormatSymbols;
 
 public class MainWindow {
-
 
     private JPanel mainPanel;
     private JScrollBar scrollBar1;
@@ -15,6 +16,7 @@ public class MainWindow {
     private JComboBox Day;
     private JComboBox Month;
     private JComboBox Year;
+    private JTextField textField1;
     private JLabel titre;
 
     public static void main(String[] args)
@@ -31,19 +33,23 @@ public class MainWindow {
         mw.sexSelector.addItem(new ComboItems("Femme", "FEMME"));
         mw.sexSelector.addItem(new ComboItems("Autre", "NONE"));
 
-        mw.Month.addItemListener(new ComboBoxDateListener(mw.Day));
+        mw.Month.addItemListener(new ComboBoxDateMonthListener(mw.Year, mw.Month, mw.Day));
+        mw.Year.addItemListener(new ComboBoxDateYearListener(mw.Month));
 
         for(int i = 2019; i>1930;i--)
         {
             mw.Year.addItem(i);
         }
 
-        String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"};
+        String[] months = new DateFormatSymbols().getMonths();
 
-        for(String month : months)
+        for(int i = 1; i<=12;i++)
         {
-            mw.Month.addItem(month);
+            String output = months[i-1].substring(0, 1).toUpperCase() + months[i-1].substring(1);
+            mw.Month.addItem(new ComboItems(output, i));
         }
+
+        mw.Day.setSelectedItem(1);
 
         frame.pack();
         frame.setVisible(true);

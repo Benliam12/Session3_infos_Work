@@ -1,11 +1,11 @@
 package UiDependencies;
 
-public class ComboItems
+public class ComboItems<T>
 {
     private String key;
-    private String value;
+    private T value;
 
-    public ComboItems(String key, String value)
+    public ComboItems(String key, T value)
     {
         this.key = key;
         this.value = value;
@@ -22,7 +22,7 @@ public class ComboItems
         return key;
     }
 
-    public String getValue()
+    public T getValue()
     {
         return value;
     }
