@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 
 /**
  * Created by Benliam12 on 2019-09-19.
@@ -19,7 +17,7 @@ public class Lab5
     private JPanel panel2;
 
 
-    private boolean firstStart = true;
+    private static boolean firstStart = true;
 
     public static void main(String[] args)
     {
@@ -55,6 +53,13 @@ public class Lab5
                 if(e.getKeyCode() == 10)
                 {
                     mw.showPalindrome();
+                }
+                if(firstStart)
+                {
+                    if(!Character.isLetter(e.getKeyChar()) && !Character.isDigit(e.getKeyChar()))
+                        return;
+                    mw.textField.setText("");
+                    firstStart = false;
                 }
             }
 

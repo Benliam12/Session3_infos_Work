@@ -11,7 +11,7 @@ public class ButtonUI extends BasicButtonUI
         super.installUI(c);
         AbstractButton button = (AbstractButton) c;
         button.setOpaque(false);
-        button.setBorder(new EmptyBorder(5, 15, 5, 15));
+        button.setBorder(new EmptyBorder(10, 20, 10, 20));
     }
 
     @Override
@@ -24,11 +24,17 @@ public class ButtonUI extends BasicButtonUI
     private void paintBackground (Graphics g, JComponent c, int yOffset) {
         Dimension size = c.getSize();
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(c.getBackground().darker());
+        g.fillRoundRect(0,0, size.width,size.height,0,0);
+      //  g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
+       // g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(c.getBackground());
+        g.fillRoundRect(0, 0, size.width, size.height-5 + yOffset*2, 0, 0);
+      /*  g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setColor(c.getBackground().darker());
         g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
         g.setColor(c.getBackground());
-        g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 5, 10, 10);
+        g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 5, 10, 15);*/
     }
 
 }

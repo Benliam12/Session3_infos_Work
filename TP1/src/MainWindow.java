@@ -1,6 +1,7 @@
 import Listeners.ComboBoxDateMonthListener;
 import Listeners.ComboBoxDateYearListener;
 import UiDependencies.ComboItems;
+import User.UserBasicData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +28,10 @@ public class MainWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(600,900));
 
-
-        mw.scrollBar1.setForeground(new Color(10,220,200));
-        mw.sexSelector.addItem(new ComboItems("Homme", "HOMME"));
-        mw.sexSelector.addItem(new ComboItems("Femme", "FEMME"));
-        mw.sexSelector.addItem(new ComboItems("Autre", "NONE"));
+        mw.scrollBar1.setForeground(new Color(100, 216, 220));
+        mw.sexSelector.addItem(new ComboItems("Homme", UserBasicData.Sex.HOMME));
+        mw.sexSelector.addItem(new ComboItems("Femme", UserBasicData.Sex.FEMME));
+        mw.sexSelector.addItem(new ComboItems("Autre", UserBasicData.Sex.NONE));
 
         mw.Month.addItemListener(new ComboBoxDateMonthListener(mw.Year, mw.Month, mw.Day));
         mw.Year.addItemListener(new ComboBoxDateYearListener(mw.Month));
@@ -45,7 +45,7 @@ public class MainWindow {
 
         for(int i = 1; i<=12;i++)
         {
-            String output = months[i-1].substring(0, 1).toUpperCase() + months[i-1].substring(1);
+            String output = months[i-1].substring(0, 1).toUpperCase() + months[i-1].substring(1); // put first letter in capital
             mw.Month.addItem(new ComboItems(output, i));
         }
 

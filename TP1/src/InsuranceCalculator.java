@@ -2,7 +2,6 @@ import User.User;
 import User.UserBasicData;
 
 import java.util.Calendar;
-import java.util.Map;
 
 import static java.lang.Math.floor;
 import static java.lang.Math.round;
@@ -10,6 +9,11 @@ import static java.lang.Math.round;
 public class InsuranceCalculator
 {
 
+    /**
+     * Main method to calculate the insurance price of a User
+     * @param user User that is applying for the price
+     * @return Amount of the insurance
+     */
     public static double getInsurancePrice(User user)
     {
         if(!checkUser(user)) {
@@ -21,31 +25,47 @@ public class InsuranceCalculator
         double basePrice = 0;
         double adjusments= 0;
 
-        basePrice = addAgeBasedPrice(user);
+        basePrice = addAgeBasedPrice(user);                           //Based price based on the user's age
 
         finalPrice += basePrice;
-        finalPrice += (basePrice * addSexPrice(user));
-        finalPrice += (basePrice * addSpecialConditionPrice(user));
-        finalPrice += addVehiculeKilometerPrice(user);
-        finalPrice += addVehicleYearPrice(user);
-        finalPrice += addExperienceDriverPrice(user);
+        finalPrice += (basePrice * addSexPrice(user));                // Add price based on user's sex
+        finalPrice += (basePrice * addSpecialConditionPrice(user));   // Add price based on special conditions the user might have
+        finalPrice += addVehiculeKilometerPrice(user);                // Add price based on the kilometers the user planned to do per year
+        finalPrice += addVehicleYearPrice(user);                      // Add price based on the vehicle's age
+        finalPrice += addExperienceDriverPrice(user);                 // Add price based on the user experience
+        //TODO: Add price based on the stealing protections the user might have.
 
-        adjusments += (finalPrice * addInfractionsPrice(user));
-        adjusments += (finalPrice * addIsAlreadyCustomerPrice(user));
+        adjusments += (finalPrice * addInfractionsPrice(user));       // Add a penalty fee based on the infractions the user might have done.
+        adjusments += (finalPrice * addIsAlreadyCustomerPrice(user)); // Add a discount if the user is already a customer.
 
         finalPrice += adjusments;
         return (double)round(finalPrice * 1000)/1000;
     }
 
+    /**
+     * Check if the user has all the required information to proceed the calculation of the insurance.
+     * In the case he doesn't meet the requirements, a message would be send to the console. Only the developer should
+     * notice these error message since they should not happen during a normal execution of the program.
+     * @param user User to check the data.
+     * @return Should return true if everything goes well. Other wise, see with the developer.
+     */
     private static boolean checkUser(User user)
     {
         if(user.getUserBasicData() != null && user.getVehicle() != null)
         {
-            return (user.getUserBasicData().isCompleted());
+            if(user.getUserBasicData().isCompleted())
+            {
+                return true;
+            }
+            else
+            {
+                System.out.println("Basic user data is not completer :/");
+                return false;
+            }
         }
         else
         {
-            System.out.println("User not Basic DATA OR Vehicle!");
+            System.out.println("User no Basic DATA OR Vehicle!");
             return false;
         }
     }
@@ -96,7 +116,7 @@ public class InsuranceCalculator
      */
     private static double addSpecialConditionPrice(User user)
     {
-        return (user.getSpecialConditionsSpeciales().size() > 0) ? 0.3 : 0;
+        return (user.hasSpecialConditions()) ? 0.3 : 0;
     }
 
     /**

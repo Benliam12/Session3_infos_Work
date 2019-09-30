@@ -13,6 +13,10 @@ public class Exercice1
         while(youBadAtEnteringGoodFile < 3)
         {
             String fileName = JOptionPane.showInputDialog("Veuillez entrer le nom du fichier :");
+
+            if(fileName==null)
+                break;
+
             fileName += ".txt";
             try
             {

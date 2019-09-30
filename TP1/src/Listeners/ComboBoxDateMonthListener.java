@@ -41,8 +41,6 @@ public class ComboBoxDateMonthListener implements ItemListener {
             System.out.println("Error formating number (class ComboBoxDateMonthListener, method:itemStateChanged)");
         }
 
-        boolean fev29th = (years % 4 == 0);
-
         try
         {
             ComboItems monthId = (ComboItems) this.months.getSelectedItem();
