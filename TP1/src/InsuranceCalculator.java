@@ -17,7 +17,7 @@ public class InsuranceCalculator
     public static double getInsurancePrice(User user)
     {
         if(!checkUser(user)) {
-            System.out.println("CHECK USER");
+            System.out.println("CHECK USER"); // Error message, something went wrong woops
             return 0;
         }
 
@@ -33,8 +33,8 @@ public class InsuranceCalculator
         finalPrice += addVehiculeKilometerPrice(user);                // Add price based on the kilometers the user planned to do per year
         finalPrice += addVehicleYearPrice(user);                      // Add price based on the vehicle's age
         finalPrice += addExperienceDriverPrice(user);                 // Add price based on the user experience
-        //TODO: Add price based on the stealing protections the user might have.
 
+        adjusments += (finalPrice * addAntiTheftDiscount(user));      //Add price based on the stealing protections the user might have.
         adjusments += (finalPrice * addInfractionsPrice(user));       // Add a penalty fee based on the infractions the user might have done.
         adjusments += (finalPrice * addIsAlreadyCustomerPrice(user)); // Add a discount if the user is already a customer.
 
@@ -182,6 +182,16 @@ public class InsuranceCalculator
     private static double addVehiculeKilometerPrice(User user)
     {
         return (user.getUserBasicData().getKilometersPerYears() >= 15000) ? floor((user.getUserBasicData().getKilometersPerYears() - 15000f) / 5000f) * 0.1 * user.getVehicle().getValue() : 0;
+    }
+
+    /**
+     * Add a 5% discount for every anti-theft system installed.
+     * @param user The car's user
+     * @return The discount.
+     */
+    private static double addAntiTheftDiscount(User user)
+    {
+        return -.05 * user.getVehicle().getInstalledSystems().size();
     }
 
 }

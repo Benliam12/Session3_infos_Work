@@ -25,8 +25,6 @@ public class Tester
         ;
         User user = new User(basicData);
 
-
-        //user.addSpecialCondition(User.SpecialConditions.THREE_OR_MORE_DRIVES);
         user.setIsCustomer(true);
 
         Vehicle v = new Vehicle("Model 3", "Tesla", 2018, 33103);
