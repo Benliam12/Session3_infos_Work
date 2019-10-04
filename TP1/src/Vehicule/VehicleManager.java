@@ -1,5 +1,8 @@
 package Vehicule;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +17,33 @@ public class VehicleManager
 
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
 
+    private Connection connection;
+
     public void setup()
     {
+            String host = "";
+            String db = "";
+            String user = "";
+            String password = "";
+
+            int port = 0;
+
+            String url = "jdbc:mysql://"+host+":"+port+"/" + db;
+            try
+            {
+                Connection c  = DriverManager.getConnection( url, user, password);
+                return;
+            }
+            catch ( SQLException e )
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+
+
         //TODO : Read file containing informations about the differents vehicles
     }
 
