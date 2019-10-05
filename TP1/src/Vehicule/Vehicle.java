@@ -13,7 +13,7 @@ public class Vehicle
     private ArrayList<AntiTheftSystem> installedSystems = new ArrayList<>();
 
 
-    public Vehicle(String model, String brand, int year, double value)
+    public Vehicle(String brand, String model, int year, double value)
     {
         this.model = model;
         this.brand = brand;

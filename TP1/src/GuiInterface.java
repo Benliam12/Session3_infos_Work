@@ -8,6 +8,15 @@ import java.util.HashMap;
 public class GuiInterface extends JFrame{
 
 
+    private void makeField(String label, JPanel panel)
+    {
+        JTextField textField = new JTextField();
+        textField.setColumns(20);
+        textField.setSize(new Dimension(200,30));
+        JLabel jLabel= new JLabel(label);
+        panel.add(jLabel);
+        panel.add(textField);
+    }
 
     public GuiInterface()
     {
@@ -17,22 +26,36 @@ public class GuiInterface extends JFrame{
         this.setLocationRelativeTo(null);
 
 
-        JPanel panelField = new JPanel();
-        panelField.setPreferredSize(new Dimension(230,60));
-        panelField.setBorder(BorderFactory.createTitledBorder("Informations personnelles"));
-        JTextField textField = new JTextField();
-        textField.setColumns(20);
-        textField.setSize(new Dimension(200,30));
-        JLabel label = new JLabel("Votre nom");
-        panelField.add(label);
-        panelField.add(textField);
+        JLabel title = new JLabel("<html><h1 style='font-size: 23px; font-weight: bold;'>Je suis un titre</h1></html>");
+        JPanel panelTitle = new JPanel();
+        panelTitle.add(title);
 
-        Box b2 = Box.createHorizontalBox();
-        b2.add(new JButton("kefhj"));
+        JPanel panelFieldBoarder = new JPanel();
+        panelFieldBoarder.setBorder(new EmptyBorder(20,20,20,20));
+
+        JPanel panelField = new JPanel();
+        panelField.setPreferredSize(new Dimension(this.getWidth()-120, (int) (this.getHeight() * 0.7)));
+        panelField.setBorder(BorderFactory.createTitledBorder("Informations personnelles"));
+
+        JPanel panelFieldPadding = new JPanel();
+        panelFieldPadding.setBorder(new EmptyBorder(20,20,20,20));
+        panelFieldPadding.setLayout(new BoxLayout(panelFieldPadding, BoxLayout.Y_AXIS));
+
+        this.makeField("Votre prénom", panelFieldPadding);
+        this.makeField("Votre nom", panelFieldPadding);
+        this.makeField("Date de naissance", panelFieldPadding);
+
+        panelField.add(panelFieldPadding);
+
+        panelFieldBoarder.add(panelField);
+
+        Box buttonBox = Box.createHorizontalBox();
+        buttonBox.add(new JButton("kefhj"));
 
         Box mainBox = Box.createVerticalBox();
-        mainBox.add(panelField);
-        mainBox.add(b2);
+        mainBox.add(panelTitle);
+        mainBox.add(panelFieldBoarder);
+        mainBox.add(buttonBox);
 
 
         this.getContentPane().add(mainBox, BorderLayout.NORTH);

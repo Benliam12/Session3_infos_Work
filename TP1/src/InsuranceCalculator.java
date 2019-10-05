@@ -128,6 +128,7 @@ public class InsuranceCalculator
     private static double addVehicleYearPrice(User user)
     {
         int year = Calendar.getInstance().get(Calendar.YEAR);
+
         int diff = year - user.getVehicle().getYear();
 
         double offValue = 0.1 - (0.02 * diff);
