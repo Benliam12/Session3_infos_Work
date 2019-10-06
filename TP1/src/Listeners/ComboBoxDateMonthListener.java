@@ -46,8 +46,6 @@ public class ComboBoxDateMonthListener implements ItemListener {
             ComboItems monthId = (ComboItems) this.months.getSelectedItem();
             YearMonth yearMonth = YearMonth.of(years, (int) monthId.getValue());
 
-            System.out.println(yearMonth.lengthOfMonth());
-
             this.days.removeAllItems();
 
             for(int i=1; i<=yearMonth.lengthOfMonth(); i++)

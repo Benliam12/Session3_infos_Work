@@ -41,9 +41,7 @@ public class VehicleManager
                     //System.out.println(results.getString("brand") + " " + results.getString("model") + " " + results.getInt("value") + "$");
                 }
 
-
                System.out.println("Good connextion!");
-
            } catch (Exception ex)
            {
                System.out.println("Cant connect ;(");
@@ -52,14 +50,14 @@ public class VehicleManager
            finally {
                try {
                    if(connection != null)
-                       connection.close();;
+                   {
+                       connection.close();
+                   }
                } catch(SQLException ex)
                {
                    System.out.println("Err closing DB");
                }
            }
-
-
         //TODO : Read file containing informations about the differents vehicles
     }
 
