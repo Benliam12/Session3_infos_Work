@@ -1,3 +1,5 @@
+package Calculator;
+
 import User.User;
 import User.UserBasicData;
 
@@ -26,7 +28,6 @@ public class InsuranceCalculator
         double adjusments= 0;
 
         basePrice = addAgeBasedPrice(user);                           //Based price based on the user's age
-
         finalPrice += basePrice;
         finalPrice += (basePrice * addSexPrice(user));                // Add price based on user's sex
         finalPrice += (basePrice * addSpecialConditionPrice(user));   // Add price based on special conditions the user might have
@@ -37,7 +38,6 @@ public class InsuranceCalculator
         adjusments += (finalPrice * addAntiTheftDiscount(user));      //Add price based on the stealing protections the user might have.
         adjusments += (finalPrice * addInfractionsPrice(user));       // Add a penalty fee based on the infractions the user might have done.
         adjusments += (finalPrice * addIsAlreadyCustomerPrice(user)); // Add a discount if the user is already a customer.
-
         finalPrice += adjusments;
         return (double)round(finalPrice * 1000)/1000;
     }

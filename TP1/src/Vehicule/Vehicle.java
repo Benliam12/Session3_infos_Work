@@ -104,5 +104,17 @@ public class Vehicle
         {
             return this.value;
         }
+
+        public static AntiTheftSystem getEnum(String value)
+        {
+            for(AntiTheftSystem v : values())
+            {
+                if(v.toString().equalsIgnoreCase(value))
+                {
+                    return v;
+                }
+            }
+            return null;
+        }
     }
 }

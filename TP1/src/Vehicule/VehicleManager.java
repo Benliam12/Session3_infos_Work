@@ -11,8 +11,10 @@ public class VehicleManager
 {
 
     private VehicleManager(){};
-    private static VehicleManager instance = new VehicleManager();
-    public static VehicleManager getInstance() {return instance;}
+    private static final VehicleManager instance = new VehicleManager();
+    public synchronized static VehicleManager getInstance() {
+        return instance;
+    }
 
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
 
@@ -37,10 +39,10 @@ public class VehicleManager
                     String model = results.getString("model");
                     int year = results.getInt("year");
                     int value = results.getInt("value");
+
                     this.vehicles.add(new Vehicle(brand, model, year, value));
                     //System.out.println(results.getString("brand") + " " + results.getString("model") + " " + results.getInt("value") + "$");
                 }
-
                System.out.println("Good connextion!");
            } catch (Exception ex)
            {
@@ -66,11 +68,13 @@ public class VehicleManager
     public ArrayList<String> getBrands()
     {
         ArrayList<String> returns = new ArrayList<>();
+
         for(Vehicle vehicle : this.vehicles)
         {
             if(!returns.contains(vehicle.getBrand()))
                 returns.add(vehicle.getBrand());
         }
+
         return returns;
     }
 
@@ -99,11 +103,11 @@ public class VehicleManager
         return returns;
     }
 
-    public Vehicle getVehicule(String brand)
+    public Vehicle getVehicule(String brand, String model, int year)
     {
         for(Vehicle v: vehicles)
         {
-            if(v.getBrand().equalsIgnoreCase(brand))
+            if(v.getBrand().equalsIgnoreCase(brand) && v.getModel().equalsIgnoreCase(model) && v.getYear() == year)
                 return v;
         }
         return null;

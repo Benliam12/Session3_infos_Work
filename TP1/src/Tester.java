@@ -1,3 +1,4 @@
+import Calculator.InsuranceCalculator;
 import User.User;
 import User.UserBasicData;
 import Vehicule.Vehicle;
@@ -30,7 +31,7 @@ public class Tester
         user.setIsCustomer(true);
         user.setSpecialConditions(true);
 
-        Vehicle v = new Vehicle("Tesla", "Model 3", 2013, 10000);
+        Vehicle v = new Vehicle("Tesla", "Model 3", 2016, 35000);
         v.addAntiTheftSystem(Vehicle.AntiTheftSystem.IMMOBILIZER);
         v.addAntiTheftSystem(Vehicle.AntiTheftSystem.TRACKING_ALARM_SYSTEM);
 
