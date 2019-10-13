@@ -9,7 +9,6 @@ import UiDependencies.SpringUtilities;
 import User.UserBasicData;
 import Vehicule.Vehicle;
 import Vehicule.VehicleManager;
-import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -378,7 +377,6 @@ public class MainPanel extends JPanel
         String[] t = {"Prénom", "Nom", "Email", "Adresse", "Numéro de téléphone"};
         HashMap<String, String> fieldData = new HashMap<>();
         ArrayList<String> emptyErrors = new ArrayList<>();
-        String ageError = "";
         boolean hasError = false;
 
         for(String field : t)
@@ -392,12 +390,6 @@ public class MainPanel extends JPanel
             }
 
             fieldData.put(field, f.trim());
-        }
-
-
-        for(String string: emptyErrors)
-        {
-            System.out.println(string);
         }
 
         ComboItems<Integer> monthData =  (ComboItems) this.comboBoxData.get("monthSelector").getSelectedItem();
@@ -427,7 +419,7 @@ public class MainPanel extends JPanel
 
         if(!pattern.matcher(fieldData.get("Email")).matches())
         {
-            outputMessage += "----------------------------\nVotre email n'est pas valide!";
+            outputMessage += "----------------------------\nVotre email n'est pas valide!\n";
         }
 
         String phoneNumber = fieldData.get("Numéro de téléphone").trim().replace("-","");
@@ -506,5 +498,6 @@ public class MainPanel extends JPanel
 
         double price = InsuranceCalculator.getInsurancePrice(user);
         System.out.printf("%s %.2f%s","The price is:",price,"$\n");
+        GuiInterface.getInstance().swtichCard(GuiInterface.FINAL_WINDOW);
     }
 }

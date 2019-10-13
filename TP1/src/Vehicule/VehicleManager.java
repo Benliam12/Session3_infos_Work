@@ -1,8 +1,14 @@
 package Vehicule;
 
-import javax.xml.transform.Result;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Benliam12 on 2019-09-19.
@@ -18,52 +24,42 @@ public class VehicleManager
 
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
 
-    private Connection connection;
+    private String readJsonFile(String file) throws IOException, ParseException {
+        InputStream in = getClass().getResourceAsStream(file);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        return reader.readLine();
+    }
 
     public void setup()
     {
-        Connection connection = null;
-           try
-           {
-                String url = "jdbc:sqlite:db.db";
-                connection = DriverManager.getConnection(url);
+        try
+        {
 
-                String querry = "SELECT * FROM cars";
-                Statement statement = connection.createStatement();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(readJsonFile("/carsData.json"));
 
-                ResultSet results = statement.executeQuery(querry);
+            JSONArray mainArray = (JSONArray) jsonObject.get("cars");
 
-                while(results.next())
-                {
-                    String brand = results.getString("brand");
-                    String model = results.getString("model");
-                    int year = results.getInt("year");
-                    int value = results.getInt("value");
+            for(int i = 0; i<mainArray.size(); i++)
+            {
+                JSONObject object = (JSONObject) mainArray.get(i);
 
-                    this.vehicles.add(new Vehicle(brand, model, year, value));
-                    //System.out.println(results.getString("brand") + " " + results.getString("model") + " " + results.getInt("value") + "$");
-                }
-               System.out.println("Good connextion!");
-           } catch (Exception ex)
-           {
-               System.out.println("Cant connect ;(");
-               ex.printStackTrace();
-           }
-           finally {
-               try {
-                   if(connection != null)
-                   {
-                       connection.close();
-                   }
-               } catch(SQLException ex)
-               {
-                   System.out.println("Err closing DB");
-               }
-           }
-        //TODO : Read file containing informations about the differents vehicles
+                String brand = (String) object.get("brand");
+                String model = (String) object.get("model");
+                Long year = (Long) object.get("year");
+                Long value = (Long) object.get("value");
+
+                this.vehicles.add(new Vehicle(brand, model, year.intValue(), value.doubleValue()));
+            }
+        } catch (IOException ex)
+        {
+            System.out.println("Can't load up cars");
+        }
+        catch (ParseException ex)
+        {
+            ex.printStackTrace();
+        }
     }
-
-
 
     public ArrayList<String> getBrands()
     {

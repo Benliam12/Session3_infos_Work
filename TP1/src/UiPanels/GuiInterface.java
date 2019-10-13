@@ -21,8 +21,10 @@ public class GuiInterface extends JFrame{
 
     private GuiInterface()
     {
+        int width = 600;
+        int height = 900;
         this.setTitle("TP 1");
-        this.setMinimumSize(new Dimension(600,900));
+        this.setMinimumSize(new Dimension(width,height));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
@@ -32,7 +34,7 @@ public class GuiInterface extends JFrame{
 
         FinalPanel finalPanel = new FinalPanel();
         MainPanel mainPanel = new MainPanel();
-        HomePanel homePanel = new HomePanel();
+        HomePanel homePanel = new HomePanel(width, height);
 
         //Panel switcher
         this.cardPanel.add(mainPanel, MAIN_WINDOW);
