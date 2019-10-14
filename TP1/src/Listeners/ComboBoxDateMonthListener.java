@@ -31,6 +31,9 @@ public class ComboBoxDateMonthListener implements ItemListener {
         this.updater();
     }
 
+    /**
+     * Update the required selectors
+     */
     public void updater()
     {
         int years = 0;

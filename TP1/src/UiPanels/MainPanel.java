@@ -32,6 +32,11 @@ public class MainPanel extends JPanel
     private HashMap<String, JCheckBox> checkBoxData = new HashMap<>();
     private HashMap<String, JRadioButton> radioButtonData = new HashMap<>();
 
+    /**
+     * Make a table of {@link JTextField}
+     * @param labels name of the field.
+     * @param panel panel to add the {@link JTextField}
+     */
     private void makeField(String[] labels, JPanel panel)
     {
         int numPairs = labels.length;
@@ -54,6 +59,11 @@ public class MainPanel extends JPanel
         panel.add(p);
     }
 
+    /**
+     * Make a table of {@link JLabel}
+     * @param labels text in the {@link JLabel}
+     * @param panel panel to add the {@link JLabel}
+     */
     private void makeList(String[] labels, JPanel panel)
     {
         int numPairs = labels.length;
@@ -72,6 +82,11 @@ public class MainPanel extends JPanel
         panel.add(p);
     }
 
+    /**
+     * Make a table of {@link JComboBox}
+     * @param labels Name of the {@link JComboBox}
+     * @param panel panel to add the table.
+     */
     private void makeComboBoxList(String[] labels, JPanel panel)
     {
         int numPairs = labels.length;
@@ -94,6 +109,11 @@ public class MainPanel extends JPanel
         panel.add(p);
     }
 
+    /**
+     * Make a table of {@link JCheckBox}
+     * @param labels name of the {@link JCheckBox}
+     * @param panel panel to add the table.
+     */
     private void makeCheckBoxList(String[] labels, JPanel panel)
     {
         int numPairs = labels.length;
@@ -372,6 +392,9 @@ public class MainPanel extends JPanel
         this.add(box);
     }
 
+    /**
+     * Checks if all the required data has been filled out. Will launch the {@link #proceed()} functions if it does confirm everything is good.
+     */
     private void checkUpData()
     {
         String[] t = {"Prénom", "Nom", "Email", "Adresse", "Numéro de téléphone"};
@@ -403,7 +426,7 @@ public class MainPanel extends JPanel
 
         String outputMessage = "Il y a quelques problèmes à résoudre:\n";
         outputMessage += (emptyErrors.size() > 0) ? "Les champs suivants doivent être remplis: \n----------------------------\n" : "";
-
+        hasError = (emptyErrors.size() > 0) || hasError;
         for(String s: emptyErrors)
         {
             outputMessage += s + "\n";
@@ -412,13 +435,14 @@ public class MainPanel extends JPanel
         boolean yearDiff = ((int)((ComboItems) this.comboBoxData.get("Age d'obtention du permis").getSelectedItem()).getValue() >= elapsedYear);
 
         outputMessage += yearDiff ? "----------------------------\nL'age d'obtention de votre permis ne peut pas être vraie \n" : "";
-        hasError = (yearDiff) ? true : hasError;
+        hasError = (yearDiff) || hasError;
 
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
 
         if(!pattern.matcher(fieldData.get("Email")).matches())
         {
+            hasError = true;
             outputMessage += "----------------------------\nVotre email n'est pas valide!\n";
         }
 
@@ -429,7 +453,8 @@ public class MainPanel extends JPanel
             Long phone = Long.parseLong(phoneNumber);
             if(phoneNumber.length() != 10)
             {
-                throw new Exception();
+                hasError=true;
+                outputMessage+= "----------------------------\nLe numéro de téléphone n'est pas valide!";
             }
         }
         catch(Exception ex)
@@ -448,6 +473,9 @@ public class MainPanel extends JPanel
         }
     }
 
+    /**
+     * Execute the calculation of the final price. Will then send the user to the final Panel ({@link GuiInterface#swtichCard(String)})
+     */
     private void proceed()
     {
         String phoneField = this.textFieldData.get("Numéro de téléphone").getText().trim().replace("-", "");
@@ -467,7 +495,7 @@ public class MainPanel extends JPanel
                 .setFirstName(this.textFieldData.get("Prénom").getText())
                 .setLastName(this.textFieldData.get("Nom").getText())
                 .setPhoneNumber(phoneNumber)
-                .setMailAddress(this.textFieldData.get("Email").getText())
+                .setEmailAddress(this.textFieldData.get("Email").getText())
                 .setSex((UserBasicData.Sex) ((ComboItems) this.comboBoxData.get("sexSelector").getSelectedItem()).getValue())
                 .setKilometersPerYear((int)((ComboItems) this.comboBoxData.get("Kilométrage annuel").getSelectedItem()).getValue())
                 .setAgeOfDriverLicence((int)((ComboItems) this.comboBoxData.get("Age d'obtention du permis").getSelectedItem()).getValue())
@@ -476,8 +504,6 @@ public class MainPanel extends JPanel
         User.User user = new User.User(basicData);
         user.setIsCustomer(this.radioButtonData.get("yes-customer").isSelected());
         user.setSpecialConditions(this.radioButtonData.get("yes-conditions").isSelected());
-
-        //System.out.println(this.comboBoxData.get("Année").getSelectedItem());
 
         Vehicle vehicle = VehicleManager.getInstance().getVehicule(this.comboBoxData.get("Marque").getSelectedItem().toString(),
                 this.comboBoxData.get("Model").getSelectedItem().toString(),
@@ -498,6 +524,7 @@ public class MainPanel extends JPanel
 
         double price = InsuranceCalculator.getInsurancePrice(user);
         System.out.printf("%s %.2f%s","The price is:",price,"$\n");
+        GuiInterface.getInstance().getFinalPanel().generateData(user, price);
         GuiInterface.getInstance().swtichCard(GuiInterface.FINAL_WINDOW);
     }
 }

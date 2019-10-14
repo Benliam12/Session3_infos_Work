@@ -33,6 +33,9 @@ public class ComboBoxCarSelector implements ItemListener {
         this.update();
     }
 
+    /**
+     * Update the other selectors.
+     */
     public void update()
     {
         switch(type)

@@ -1,5 +1,7 @@
 package UiPanels;
 
+import User.User;
+
 import javax.swing.*;
 
 /**
@@ -8,6 +10,17 @@ import javax.swing.*;
  */
 public class FinalPanel extends JPanel {
 
+    private boolean hasData = false;
+
+    /**
+     * Fills out the submission with the user data.
+     * @param user User object that contains the data.
+     * @param amount Already calculated amount of the insurance
+     */
+    public void generateData(User user, double amount)
+    {
+
+    }
 
     public FinalPanel()
     {

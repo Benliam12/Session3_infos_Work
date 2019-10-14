@@ -1,5 +1,9 @@
 package UiDependencies;
 
+/**
+ * Used for {@link javax.swing.JComboBox} to put custom data in.
+ * @param <T> type of stored data
+ */
 public class ComboItems<T>
 {
     private String key;
@@ -17,11 +21,10 @@ public class ComboItems<T>
         return key;
     }
 
-    public String getKey()
-    {
-        return key;
-    }
-
+    /**
+     * Return the linked data.
+     * @return value of the comboItems
+     */
     public T getValue()
     {
         return value;

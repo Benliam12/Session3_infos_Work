@@ -19,7 +19,7 @@ public class Tester
                 .setFirstName("Jean")
                 .setLastName("Marie")
                 .setPhoneNumber("819-291-2019")
-                .setMailAddress("patate@gmail.com")
+                .setEmailAddress("patate@gmail.com")
                 .setSex(UserBasicData.Sex.FEMME)
                 .setKilometersPerYear(30000)
                 .setAgeOfDriverLicence(16)

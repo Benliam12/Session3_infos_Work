@@ -30,11 +30,13 @@ public class VehicleManager
         return reader.readLine();
     }
 
+    /**
+     * Set up the data that are stored in the database file in order to load up the available cars.
+     */
     public void setup()
     {
         try
         {
-
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(readJsonFile("/carsData.json"));
 
@@ -61,6 +63,10 @@ public class VehicleManager
         }
     }
 
+    /**
+     * Returns the available brands to pick
+     * @return available brands / null if none
+     */
     public ArrayList<String> getBrands()
     {
         ArrayList<String> returns = new ArrayList<>();
@@ -70,10 +76,14 @@ public class VehicleManager
             if(!returns.contains(vehicle.getBrand()))
                 returns.add(vehicle.getBrand());
         }
-
         return returns;
     }
 
+    /**
+     * Return all the models for a specific brand
+     * @param brand brand
+     * @return available models / null if none
+     */
     public ArrayList<String> getModels(String brand)
     {
         ArrayList<String> returns = new ArrayList<>();
@@ -86,6 +96,12 @@ public class VehicleManager
         return returns;
     }
 
+    /**
+     * Returns all the years for a specific model.
+     * @param brand car's brand
+     * @param model model
+     * @return available years / null if none
+     */
     public ArrayList<Integer> getYears(String brand, String model)
     {
         ArrayList<Integer> returns = new ArrayList<>();
@@ -99,6 +115,13 @@ public class VehicleManager
         return returns;
     }
 
+    /**
+     * Get a specific vehicle.
+     * @param brand vehicle's brand
+     * @param model vehicle's model
+     * @param year vehicle's year
+     * @return Vehicle Object / null if not found.
+     */
     public Vehicle getVehicule(String brand, String model, int year)
     {
         for(Vehicle v: vehicles)
