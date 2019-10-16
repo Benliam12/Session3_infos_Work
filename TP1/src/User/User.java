@@ -2,6 +2,9 @@ package User;
 
 import Vehicule.Vehicle;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +23,42 @@ public class User
         this.userBasicData = userBasicData;
     }
 
+    public void toFile(String filename, double price)
+    {
+        String data = "";
+
+        try
+        {
+            FileWriter fileWriter = new FileWriter(filename);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            data += "[Information personnelles]\n";
+            data += "Prénom: " + this.userBasicData.getFirstName() + "\n";
+            data += "Nom : " + this.userBasicData.getLastName() + "\n";
+            data += "Age : " + this.userBasicData.getAge()  + "\n";
+            data += "Email: " + this.userBasicData.getEmail() + "\n";
+
+            data += "\n\n\n\n"; // Spacing
+
+            data += "[Information Véhicule]\n";
+            data += "Marque: " + this.vehicle.getBrand() + "\n";
+            data += "Model: " + this.vehicle.getModel() + "\n";
+            data += "Année: "+ this.vehicle.getYear() + "\n";
+            data += "Valeur de référence: "+ this.vehicle.getValue() + "\n";
+
+            data += "\n\n\n\n"; // Spacing
+
+            data += "[Montant de l'assurance]\n";
+            data += String.valueOf(price) + "$";
+
+            bufferedWriter.write(data);
+
+            bufferedWriter.close();
+        } catch (IOException ex)
+        {
+            System.out.println("Impossible d'écrire la soumuissions!");
+        }
+    }
 
     /*#########################
         SETTERS

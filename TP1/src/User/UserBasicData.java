@@ -45,6 +45,33 @@ public class UserBasicData
      */
 
     /**
+     * Returns the user's first name
+     * @return user's first name
+     */
+    public String getFirstName()
+    {
+        return this.firstName;
+    }
+
+    /**
+     * Returns the user's last name
+     * @return user's last name
+     */
+    public String getLastName()
+    {
+        return this.lastName;
+    }
+
+    /**
+     * Returns user's email
+     * @return user's email
+     */
+    public String getEmail()
+    {
+        return this.emailAddress;
+    }
+
+    /**
      * Returns the user's age.
      * @return user's age.
      */

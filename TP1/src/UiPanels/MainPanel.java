@@ -446,7 +446,7 @@ public class MainPanel extends JPanel
             outputMessage += "----------------------------\nVotre email n'est pas valide!\n";
         }
 
-        String phoneNumber = fieldData.get("Numéro de téléphone").trim().replace("-","");
+        String phoneNumber = fieldData.get("Numéro de téléphone").trim().replace("-","").replace("(", "").replace(")", "").replace(" ", "");
 
         try
         {
@@ -478,7 +478,7 @@ public class MainPanel extends JPanel
      */
     private void proceed()
     {
-        String phoneField = this.textFieldData.get("Numéro de téléphone").getText().trim().replace("-", "");
+        String phoneField = this.textFieldData.get("Numéro de téléphone").getText().trim().replace("-", "").replace("(", "").replace(")", "").replace(" ", "");
         String phoneNumber = phoneField.substring(0,3) + "-" + phoneField.substring(3,6) + "-" + phoneField.substring(6);
 
         ComboItems<Integer> monthData =  (ComboItems) this.comboBoxData.get("monthSelector").getSelectedItem();
@@ -524,6 +524,9 @@ public class MainPanel extends JPanel
 
         double price = InsuranceCalculator.getInsurancePrice(user);
         System.out.printf("%s %.2f%s","The price is:",price,"$\n");
+
+        //Write down file with data.
+
         GuiInterface.getInstance().getFinalPanel().generateData(user, price);
         GuiInterface.getInstance().swtichCard(GuiInterface.FINAL_WINDOW);
     }

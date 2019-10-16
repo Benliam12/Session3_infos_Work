@@ -6,9 +6,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Benliam12 on 2019-09-19.

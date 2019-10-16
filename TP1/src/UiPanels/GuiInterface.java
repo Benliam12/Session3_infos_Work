@@ -1,8 +1,5 @@
 package UiPanels;
 
-import Vehicule.Vehicle;
-import Vehicule.VehicleManager;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -31,11 +28,10 @@ public class GuiInterface extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-
         //Wrapping everything up
         this.cardPanel = new JPanel(new CardLayout());
 
-        this.finalPanel = new FinalPanel();
+        this.finalPanel = new FinalPanel(width, height);
         this.mainPanel = new MainPanel();
         this.homePanel = new HomePanel(width, height);
 
@@ -45,10 +41,15 @@ public class GuiInterface extends JFrame{
         this.cardPanel.add(this.homePanel, HOME_WINDOW);
 
         CardLayout cl = (CardLayout) this.cardPanel.getLayout();
-        cl.show(this.cardPanel,HOME_WINDOW);
+        cl.show(this.cardPanel,FINAL_WINDOW);
         this.getContentPane().add(this.cardPanel, BorderLayout.NORTH);
     }
 
+
+    public void close()
+    {
+        this.dispose();
+    }
 
     /**
      * Switch the current panel.
@@ -92,6 +93,8 @@ public class GuiInterface extends JFrame{
         GuiInterface guiInterface = GuiInterface.getInstance();
 
         guiInterface.setVisible(true);
+
+
     }
 
 }
