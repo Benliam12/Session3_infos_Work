@@ -31,7 +31,7 @@ public class MainWindow {
         mw.scrollBar1.setForeground(new Color(100, 216, 220));
         mw.sexSelector.addItem(new ComboItems("Homme", UserBasicData.Sex.HOMME));
         mw.sexSelector.addItem(new ComboItems("Femme", UserBasicData.Sex.FEMME));
-        mw.sexSelector.addItem(new ComboItems("Autre", UserBasicData.Sex.NONE));
+        mw.sexSelector.addItem(new ComboItems("Autre", UserBasicData.Sex.AUTRE));
 
         mw.Month.addItemListener(new ComboBoxDateMonthListener(mw.Year, mw.Month, mw.Day));
         mw.Year.addItemListener(new ComboBoxDateYearListener(mw.Month));

@@ -1,5 +1,8 @@
 package User;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class UserBasicData
 {
 
@@ -8,6 +11,7 @@ public class UserBasicData
     protected String address;
     protected String emailAddress;
     protected String phoneNumber;
+    protected String dateOfBirth;
     protected int age;
     protected int ageOfDriverLicence;
     protected int kilometersPerYears;
@@ -30,11 +34,11 @@ public class UserBasicData
                 this.firstName           != null &&
                 this.lastName            != null &&
                 this.address             != null &&
-                this.emailAddress         != null &&
+                this.emailAddress        != null &&
                 this.phoneNumber         != null &&
+                this.dateOfBirth         != null &&
                 this.ageOfDriverLicence  != 0    &&
                 this.kilometersPerYears  != 0    &&
-                this.age                 != 0    &&
                 this.numberOfInfractions != -1   &&
                 this.sex                 != null
                 );
@@ -43,6 +47,33 @@ public class UserBasicData
     /*
     GETTERS
      */
+
+    /**
+     * Returns user's address
+     * @return user's address
+     */
+    public String getAddress()
+    {
+        return this.address;
+    }
+
+    /**
+     * Returns user's phoneNumber
+     * @return user's phoneNumber
+     */
+    public String getPhoneNumber()
+    {
+        return this.phoneNumber;
+    }
+
+    /**
+     * Returns user's date of Birth
+     * @return user's date of Birth
+     */
+    public String getDateOfBirth()
+    {
+        return this.dateOfBirth;
+    }
 
     /**
      * Returns the user's first name
@@ -77,6 +108,22 @@ public class UserBasicData
      */
     public int getAge()
     {
+        this.age = 0;
+        try
+        {
+            String[] date = this.dateOfBirth.split("/");
+            int year = Integer.parseInt(date[2]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[0]);
+            LocalDate age  = LocalDate.of(year, month, day);
+            LocalDate now = LocalDate.now();
+            this.age = Period.between(age, now).getYears();
+        }
+        catch (NumberFormatException ex)
+        {
+
+        }
+
         return this.age;
     }
 
@@ -118,6 +165,17 @@ public class UserBasicData
     /*
     SETTERS
      */
+
+    /**
+     * Set the date of birth
+     * @param dateOfBirth Date of birth
+     * @return Current object
+     */
+    public UserBasicData setDateOfBirth(String dateOfBirth)
+    {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
 
     /**
      * Set the amount of infractions.
@@ -236,7 +294,7 @@ public class UserBasicData
     {
         HOMME,
         FEMME,
-        NONE
+        AUTRE
     }
 
 }

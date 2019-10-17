@@ -32,6 +32,8 @@ public class MainPanel extends JPanel
     private HashMap<String, JCheckBox> checkBoxData = new HashMap<>();
     private HashMap<String, JRadioButton> radioButtonData = new HashMap<>();
 
+    private GuiInterface guiInterface;
+
     /**
      * Make a table of {@link JTextField}
      * @param labels name of the field.
@@ -147,9 +149,11 @@ public class MainPanel extends JPanel
         panel.add(p);
     }
 
-    public MainPanel()
+    public MainPanel(GuiInterface guiInterface)
     {
         super();
+        this.guiInterface = guiInterface;
+
         this.setSize(new Dimension(600,970));
 
         JLabel title = new JLabel("<html><h1 style='font-size: 23px; font-weight: bold;'>Soumission d'assurance</h1></html>");
@@ -223,7 +227,7 @@ public class MainPanel extends JPanel
         this.comboBoxData.put("sexSelector", sexSelector);
         sexSelector.addItem(new ComboItems("Homme", UserBasicData.Sex.HOMME));
         sexSelector.addItem(new ComboItems("Femme", UserBasicData.Sex.FEMME));
-        sexSelector.addItem(new ComboItems("Autre", UserBasicData.Sex.NONE));
+        sexSelector.addItem(new ComboItems("Autre", UserBasicData.Sex.AUTRE));
         sexSelectorLabel.setLabelFor(sexSelector);
         sexSelectorPanel.add(sexSelectorLabel);
         sexSelectorPanel.add(sexSelector);
@@ -492,6 +496,7 @@ public class MainPanel extends JPanel
         UserBasicData basicData = new UserBasicData();
         basicData.setAddress(this.textFieldData.get("Adresse").getText())
                 .setAge(elapsedYear)
+                .setDateOfBirth(String.valueOf(day)+"/"+String.valueOf(monthId)+"/"+String.valueOf(year))
                 .setFirstName(this.textFieldData.get("Prénom").getText())
                 .setLastName(this.textFieldData.get("Nom").getText())
                 .setPhoneNumber(phoneNumber)
@@ -527,7 +532,7 @@ public class MainPanel extends JPanel
 
         //Write down file with data.
 
-        GuiInterface.getInstance().getFinalPanel().generateData(user, price);
-        GuiInterface.getInstance().swtichCard(GuiInterface.FINAL_WINDOW);
+        this.guiInterface.getFinalPanel().generateData(user, price);
+        this.guiInterface.swtichCard(GuiInterface.FINAL_WINDOW);
     }
 }

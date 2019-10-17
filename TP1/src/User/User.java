@@ -36,17 +36,42 @@ public class User
             data += "Prénom: " + this.userBasicData.getFirstName() + "\n";
             data += "Nom : " + this.userBasicData.getLastName() + "\n";
             data += "Age : " + this.userBasicData.getAge()  + "\n";
+            data += "Sexe: "+ this.userBasicData.getSex().toString() + "\n";
             data += "Email: " + this.userBasicData.getEmail() + "\n";
+            data += "Adresse: "+ this.userBasicData.getAddress() + "\n";
+            data += "Date de naissance:" + this.userBasicData.getDateOfBirth() + "\n";
+            data += "Numéro de téléphone:" + this.userBasicData.getPhoneNumber() + "\n";
+            data += "Possède une assurance avec la compagnie? : "+ ((this.isAlreadyCustomer) ? "Oui" : "Non") + "\n";
 
-            data += "\n\n\n\n"; // Spacing
+            data += "\n"; // Spacing
+
+            data += "[Informations conduite]\n";
+            data += "Kilmétrage annuel:" + String.valueOf(this.userBasicData.getKilometersPerYears()) + "\n";
+            data += "Age d'obtention du permis de conduite:" + String.valueOf(this.userBasicData.getAgeOfDriverLicence()) + "\n";
+            data += "Nombre d'infraction:" + String.valueOf(this.userBasicData.getNumberOfInfractions()) + "\n";
+
+            data += "\n"; // Spacing
 
             data += "[Information Véhicule]\n";
             data += "Marque: " + this.vehicle.getBrand() + "\n";
             data += "Model: " + this.vehicle.getModel() + "\n";
             data += "Année: "+ this.vehicle.getYear() + "\n";
             data += "Valeur de référence: "+ this.vehicle.getValue() + "\n";
+            data += "Systems anti vol installé: \n";
 
-            data += "\n\n\n\n"; // Spacing
+            if(this.vehicle.getInstalledSystems().size() == 0)
+            {
+                data += "Aucun\n";
+            }
+            else
+            {
+                for(Vehicle.AntiTheftSystem systems  : this.vehicle.getInstalledSystems())
+                {
+                    data += "- " + systems.toString() + "\n";
+                }
+            }
+
+            data += "\n"; // Spacing
 
             data += "[Montant de l'assurance]\n";
             data += String.valueOf(price) + "$";

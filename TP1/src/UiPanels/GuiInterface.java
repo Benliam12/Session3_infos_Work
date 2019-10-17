@@ -5,9 +5,6 @@ import java.awt.*;
 
 public class GuiInterface extends JFrame{
 
-    private static GuiInterface instance = new GuiInterface();
-    public synchronized static GuiInterface getInstance() {return instance;}
-
     private JPanel cardPanel;
     private HomePanel homePanel;
     private MainPanel mainPanel;
@@ -31,9 +28,9 @@ public class GuiInterface extends JFrame{
         //Wrapping everything up
         this.cardPanel = new JPanel(new CardLayout());
 
-        this.finalPanel = new FinalPanel(width, height);
-        this.mainPanel = new MainPanel();
-        this.homePanel = new HomePanel(width, height);
+        this.finalPanel = new FinalPanel(width, height, this);
+        this.mainPanel = new MainPanel(this);
+        this.homePanel = new HomePanel(width, height, this);
 
         //Panel switcher
         this.cardPanel.add(this.mainPanel, MAIN_WINDOW);
@@ -41,7 +38,7 @@ public class GuiInterface extends JFrame{
         this.cardPanel.add(this.homePanel, HOME_WINDOW);
 
         CardLayout cl = (CardLayout) this.cardPanel.getLayout();
-        cl.show(this.cardPanel,FINAL_WINDOW);
+        cl.show(this.cardPanel,HOME_WINDOW);
         this.getContentPane().add(this.cardPanel, BorderLayout.NORTH);
     }
 
@@ -90,7 +87,7 @@ public class GuiInterface extends JFrame{
 
     public static void main(String[] args)
     {
-        GuiInterface guiInterface = GuiInterface.getInstance();
+        GuiInterface guiInterface = new GuiInterface();
 
         guiInterface.setVisible(true);
 

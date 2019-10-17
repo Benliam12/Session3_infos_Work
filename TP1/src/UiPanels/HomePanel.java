@@ -11,8 +11,10 @@ import java.awt.event.ActionListener;
  */
 public class HomePanel extends JPanel
 {
-    public HomePanel(int width, int height)
+    private GuiInterface guiInterface;
+    public HomePanel(int width, int height, GuiInterface guiInterface)
     {
+        this.guiInterface = guiInterface;
         JPanel contentPanel = new JPanel();
         contentPanel.setPreferredSize(new Dimension(width, height+250));
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
@@ -25,8 +27,8 @@ public class HomePanel extends JPanel
 
         JPanel descriptionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         descriptionPanel.setBorder(new EmptyBorder(10,30,10,30));
-        JLabel description = new JLabel("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec finibus ligula. Mauris eros purus, vulputate ac orci nec, blandit vehicula odio. In dignissim, odio quis eleifend sagittis, libero eros semper velit, sit amet ultricies tellus quam eget urna. Mauris interdum nulla lectus, vel scelerisque dui bibendum eu. Nunc massa tortor, efficitur vitae accumsan sit amet, feugiat nec lectus. Donec tellus quam, placerat id consectetur a, congue sed nunc. Sed turpis ante, pulvinar ac molestie vitae, ultrices ut diam. Duis congue ante in nisl ultricies laoreet. Maecenas condimentum lectus et augue tempus efficitur. In molestie lacus nibh, vitae elementum magna imperdiet et. Pellentesque porta elit sit amet vehicula hendrerit.");
-        description.setText("<html><div style='width: 425px; text-align:justify;'>"+description.getText()+"</div></html>");
+        JLabel description = new JLabel("Bienvenue dans le calculateur d'assurance!\n Vous pouvez calculer votre prime d'assurance en cliquant sur le bouton ci-dessous.");
+        description.setText("<html><div style='width: 425px; font-size: 14px; text-align:center;'>"+description.getText()+"</div></html>");
         descriptionPanel.add(description);
 
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -35,7 +37,7 @@ public class HomePanel extends JPanel
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GuiInterface.getInstance().swtichCard(GuiInterface.MAIN_WINDOW);
+                guiInterface.swtichCard(GuiInterface.MAIN_WINDOW);
             }
         });
         btnPanel.add(startBtn);

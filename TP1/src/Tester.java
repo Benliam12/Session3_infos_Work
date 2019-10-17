@@ -16,6 +16,7 @@ public class Tester
 
         basicData.setAddress("450 rue Poney")
                 .setAge(18)
+                .setDateOfBirth("24/10/2000")
                 .setFirstName("Jean")
                 .setLastName("Marie")
                 .setPhoneNumber("819-291-2019")
@@ -40,6 +41,8 @@ public class Tester
         double price = InsuranceCalculator.getInsurancePrice(user);
 
         System.out.printf("%s %.2f%s","The price is:",price,"$\n");
+
+        user.toFile("data.txt",price);
 
         VehicleManager vm = VehicleManager.getInstance();
         VehicleManager.getInstance().setup();
