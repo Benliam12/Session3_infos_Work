@@ -56,10 +56,9 @@ public class ComboBoxDateMonthListener implements ItemListener {
                 this.days.addItem(i);
             }
         }
-        catch(Exception ex)
+        catch(NullPointerException ex)
         {
             //Used because when launching the program, it doesn't register first day.
-            System.out.println("Start Err");
         }
 
     }

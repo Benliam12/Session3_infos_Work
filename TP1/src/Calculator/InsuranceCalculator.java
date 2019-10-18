@@ -3,6 +3,7 @@ package Calculator;
 import User.User;
 import User.UserBasicData;
 
+import java.io.File;
 import java.util.Calendar;
 
 import static java.lang.Math.floor;
@@ -40,6 +41,26 @@ public class InsuranceCalculator
         adjusments += (finalPrice * addIsAlreadyCustomerPrice(user)); // Add a discount if the user is already a customer.
         finalPrice += adjusments;
         return (double)round(finalPrice * 1000)/1000;
+    }
+
+    /**
+     * Fills out the submission with the user data. And export it to a txt file.
+     * @param user User object that contains the data.
+     * @param amount Already calculated amount of the insurance
+     */
+    public static void generateData(User user, double amount)
+    {
+        String fileName = "soumission";
+        int i = 0;
+        File file;
+        do{
+            file = new File(fileName + String.valueOf(i) + ".txt");
+            i++;
+        } while(file.exists());
+
+        user.toFile(file.getName(), amount);
+
+
     }
 
     /**

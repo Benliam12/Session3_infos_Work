@@ -15,12 +15,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormatSymbols;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import static java.lang.StrictMath.round;
 
 /**
  * Created by Benliam12 on 2019-10-06.
@@ -337,7 +340,7 @@ public class MainPanel extends JPanel
         antiThefSystemPanel.add(new JLabel("Selectionnez les sytèmes antivols que votre véhicule possède:", JLabel.TRAILING));
         panelFieldPadding.add(antiThefSystemPanel);
 
-        String[] checkBoxs = {"Alarme sonore", "Marquage intensif antivol", "Antidemarreur", "Système d'alarme de repérage", "Autre", "Aucun"};
+        String[] checkBoxs = {"Alarme sonore", "Marquage intensif antivol", "Antidémarreur", "Système d'alarme de repérage", "Autre", "Aucun"};
         this.makeCheckBoxList(checkBoxs,panelFieldPadding);
         this.checkBoxData.get("Aucun").setSelected(true);
 
@@ -495,7 +498,6 @@ public class MainPanel extends JPanel
 
         UserBasicData basicData = new UserBasicData();
         basicData.setAddress(this.textFieldData.get("Adresse").getText())
-                .setAge(elapsedYear)
                 .setDateOfBirth(String.valueOf(day)+"/"+String.valueOf(monthId)+"/"+String.valueOf(year))
                 .setFirstName(this.textFieldData.get("Prénom").getText())
                 .setLastName(this.textFieldData.get("Nom").getText())
@@ -515,7 +517,7 @@ public class MainPanel extends JPanel
                 (int) this.comboBoxData.get("Année").getSelectedItem());
 
 
-        String[] checkBoxs = {"Alarme sonore", "Marquage intensif antivol", "Antidemarreur", "Système d'alarme de repérage", "Autre", "Aucun"};
+        String[] checkBoxs = {"Alarme sonore", "Marquage intensif antivol", "Antidémarreur", "Système d'alarme de repérage", "Autre", "Aucun"};
 
         for(String antiTheft : checkBoxs)
         {
@@ -528,11 +530,10 @@ public class MainPanel extends JPanel
         user.setVehicle(vehicle);
 
         double price = InsuranceCalculator.getInsurancePrice(user);
-        System.out.printf("%s %.2f%s","The price is:",price,"$\n");
+        DecimalFormat df = new DecimalFormat("#.00");
 
-        //Write down file with data.
-
-        this.guiInterface.getFinalPanel().generateData(user, price);
+        InsuranceCalculator.generateData(user,price);
         this.guiInterface.swtichCard(GuiInterface.FINAL_WINDOW);
+        JOptionPane.showMessageDialog(guiInterface, "Le montant de votre assurance est de : " + df.format(price) +"$");
     }
 }

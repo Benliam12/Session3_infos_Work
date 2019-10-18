@@ -15,7 +15,6 @@ public class Tester
         UserBasicData basicData = new UserBasicData();
 
         basicData.setAddress("450 rue Poney")
-                .setAge(18)
                 .setDateOfBirth("24/10/2000")
                 .setFirstName("Jean")
                 .setLastName("Marie")

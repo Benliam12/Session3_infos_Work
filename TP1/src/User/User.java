@@ -5,6 +5,7 @@ import Vehicule.Vehicle;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -35,33 +36,33 @@ public class User
             data += "[Information personnelles]\n";
             data += "Prénom: " + this.userBasicData.getFirstName() + "\n";
             data += "Nom : " + this.userBasicData.getLastName() + "\n";
-            data += "Age : " + this.userBasicData.getAge()  + "\n";
-            data += "Sexe: "+ this.userBasicData.getSex().toString() + "\n";
-            data += "Email: " + this.userBasicData.getEmail() + "\n";
+            data += "Age : " + this.userBasicData.getAge()  + " ans\n";
+            data += "Sexe : "+ this.userBasicData.getSex().toString() + "\n";
+            data += "Email : " + this.userBasicData.getEmail() + "\n";
             data += "Adresse: "+ this.userBasicData.getAddress() + "\n";
-            data += "Date de naissance:" + this.userBasicData.getDateOfBirth() + "\n";
-            data += "Numéro de téléphone:" + this.userBasicData.getPhoneNumber() + "\n";
+            data += "Date de naissance :" + this.userBasicData.getDateOfBirth() + "\n";
+            data += "Numéro de téléphone :" + this.userBasicData.getPhoneNumber() + "\n";
             data += "Possède une assurance avec la compagnie? : "+ ((this.isAlreadyCustomer) ? "Oui" : "Non") + "\n";
 
             data += "\n"; // Spacing
 
             data += "[Informations conduite]\n";
-            data += "Kilmétrage annuel:" + String.valueOf(this.userBasicData.getKilometersPerYears()) + "\n";
-            data += "Age d'obtention du permis de conduite:" + String.valueOf(this.userBasicData.getAgeOfDriverLicence()) + "\n";
-            data += "Nombre d'infraction:" + String.valueOf(this.userBasicData.getNumberOfInfractions()) + "\n";
+            data += "Kilmétrage annuel : " + String.valueOf(this.userBasicData.getKilometersPerYears()) + "km\n";
+            data += "Age d'obtention du permis de conduite : " + String.valueOf(this.userBasicData.getAgeOfDriverLicence()) + " ans\n";
+            data += "Nombre d'infraction : " + String.valueOf(this.userBasicData.getNumberOfInfractions()) + "\n";
 
             data += "\n"; // Spacing
 
             data += "[Information Véhicule]\n";
-            data += "Marque: " + this.vehicle.getBrand() + "\n";
-            data += "Model: " + this.vehicle.getModel() + "\n";
-            data += "Année: "+ this.vehicle.getYear() + "\n";
-            data += "Valeur de référence: "+ this.vehicle.getValue() + "\n";
-            data += "Systems anti vol installé: \n";
+            data += "Marque : " + this.vehicle.getBrand() + "\n";
+            data += "Model : " + this.vehicle.getModel() + "\n";
+            data += "Année : "+ this.vehicle.getYear() + "\n";
+            data += "Valeur de référence : "+ this.vehicle.getValue() + "\n";
+            data += "Systems anti vol installé : \n";
 
             if(this.vehicle.getInstalledSystems().size() == 0)
             {
-                data += "Aucun\n";
+                data += "- Aucun\n";
             }
             else
             {
@@ -74,7 +75,10 @@ public class User
             data += "\n"; // Spacing
 
             data += "[Montant de l'assurance]\n";
-            data += String.valueOf(price) + "$";
+
+            DecimalFormat df = new DecimalFormat("#.00");
+
+            data += df.format(price) + "$";
 
             bufferedWriter.write(data);
 
@@ -84,6 +88,8 @@ public class User
             System.out.println("Impossible d'écrire la soumuissions!");
         }
     }
+
+
 
     /*#########################
         SETTERS

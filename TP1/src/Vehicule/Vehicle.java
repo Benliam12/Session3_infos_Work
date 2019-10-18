@@ -153,12 +153,21 @@ public class Vehicle
             this.value = value;
         }
 
+        /**
+         * Returns the value of the emum
+         * @return value of the Enum
+         */
         @Override
         public String toString()
         {
             return this.value;
         }
 
+        /**
+         * Returns the correct Enum
+         * @param value Value of the wanted Enum
+         * @return Enum / null if not found
+         */
         public static AntiTheftSystem getEnum(String value)
         {
             for(AntiTheftSystem v : values())
