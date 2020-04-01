@@ -1,13 +1,10 @@
 package UiPanels;
 
-import User.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 /**
  * Created by Benliam12 on 2019-10-06.
