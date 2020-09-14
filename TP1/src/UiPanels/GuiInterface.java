@@ -45,7 +45,7 @@ public class GuiInterface extends JFrame{
 
     public void close()
     {
-        this.dispose();
+        System.exit(0);
     }
 
     /**

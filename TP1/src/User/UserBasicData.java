@@ -12,7 +12,6 @@ public class UserBasicData
     protected String emailAddress;
     protected String phoneNumber;
     protected String dateOfBirth;
-    protected int age;
     protected int ageOfDriverLicence;
     protected int kilometersPerYears;
     protected int numberOfInfractions = -1;
@@ -108,7 +107,7 @@ public class UserBasicData
      */
     public int getAge()
     {
-        this.age = 0;
+        int returnAge = 0;
         try
         {
             String[] date = this.dateOfBirth.split("/");
@@ -117,14 +116,14 @@ public class UserBasicData
             int day = Integer.parseInt(date[0]);
             LocalDate age  = LocalDate.of(year, month, day);
             LocalDate now = LocalDate.now();
-            this.age = Period.between(age, now).getYears();
+            returnAge = Period.between(age, now).getYears();
         }
         catch (NumberFormatException ex)
         {
 
         }
 
-        return this.age;
+        return returnAge;
     }
 
     /**
@@ -240,17 +239,6 @@ public class UserBasicData
     public UserBasicData setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
-        return this;
-    }
-
-    /**
-     * Set the age
-     * @param age age
-     * @return current Object
-     */
-    public UserBasicData setAge(int age)
-    {
-        this.age = age;
         return this;
     }
 
