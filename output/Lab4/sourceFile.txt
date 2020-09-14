@@ -1,0 +1,6 @@
+java -cp "PROJECT DE LA MORT QUI TUE.jar" Exercice3.Exercice3 SourceFile.txt Pigeon.txt
+
+gfkldsjguhtjkdfslgtjhksrfserijoujkdsleoijhtg
+
+rfhdg
+rtg

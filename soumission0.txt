@@ -1,0 +1,26 @@
+[Information personnelles]
+Prénom: Je suis là
+Nom : Me voila
+Age : 83
+Sexe: FEMME
+Email: Ici@Yolo.com
+Adresse: fgdshjakilO
+Date de naissance:1/1/1936
+Numéro de téléphone:123-456-7890
+Possède une assurance avec la compagnie? : Non
+
+[Informations conduite]
+Kilmétrage annuel:8000
+Age d'obtention du permis de conduite:16
+Nombre d'infraction:0
+
+[Information Véhicule]
+Marque: BMW
+Model: M850
+Année: 2018
+Valeur de référence: 122000.0
+Systems anti vol installé: 
+Aucun
+
+[Montant de l'assurance]
+9889.5$
